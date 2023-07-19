@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 //connecting to the database
 mongoose.connect(
-  "mongodb+srv://Nitish:nitish33@cluster0.ksobj.mongodb.net/Ecommerce?retryWrites=true&w=majority"
+  "mongodb+srv://nandanith7563:jfz40OLtDX3XhDF6@cluster0.kx8uhq4.mongodb.net/?retryWrites=true&w=majority"
 );
 
 // acquiring the connection to check if it is succesfull
