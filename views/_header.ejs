@@ -1,0 +1,22 @@
+<header>
+  <nav class="navbar " style="background-color: black;" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" style="color: aliceblue;">Placement Cell</a>
+      <% if(locals.user) { %>
+      <a class="navbar-brand" href="/profile"
+        >Hello <%= locals.user.username%></a
+      >
+      <%}%>
+
+      <form class="d-flex">
+        <a class="navbar-brand" href="/dashboard" style="color: aliceblue;" >Dashboard</a>
+        <a class="navbar-brand" href="/student/add-student"  style="color: aliceblue;">Add new Student</a>
+        <a class="navbar-brand" href="/interview/add-interview"  style="color: aliceblue;"
+          >Add Interview</a
+        >
+        <a class="navbar-brand" href="/download"   style="color: aliceblue;">Report</a>
+        <a class="navbar-brand" href="/sign-out"  style="color: aliceblue;">Signout</a>
+      </form>
+    </div>
+  </nav>
+</header>
