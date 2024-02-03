@@ -1,0 +1,37 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: rgb(138, 176, 63);
+}
+.main{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+#box{
+    width: 40%;
+
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    border-radius: 20px;
+    padding: 15px;
+
+}
+.row{
+    width: 100%;
+    margin: 2rem;
+    margin-left: 0;
+}
+.btn{
+    margin-left: 47%;
+    background-color:rgb(138, 176, 63) ;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}

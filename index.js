@@ -1,67 +1,92 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const app = express();
-const port = process.env.PORT || 8000;
-const db = require("./config/mongoose");
+const questions = [
+  {
+    question: "html stand for",
+    a: "hyper text markup language",
+    b: "hyper tweet make language",
+    c: "hyper markup language",
+    d: "hype tect mark language",
+    correct: "a",
+  },
+  {
+    question: "Which type of JavaScript language is ___",
+    a: "Object-Oriented",
+    b: "Object-Based",
+    c: "Assembly-language",
+    d: "High-level",
+    correct: "b",
+  },
+  {
+    question:
+      "Which one of the following also known as Conditional Expression:",
+    a: "Alternative to if-else",
+    b: "Switch statement",
+    c: "If-then-else statement",
+    d: "immediate if",
+    correct: "d",
+  },
+  {
+    question: "In JavaScript, what is a block of statement?",
+    a: "Conditional block",
+    b: "block that combines a number of statements into a single compound statement",
+    c: "both conditional block and a single statement",
+    d: "block that contains a single statement",
+    correct: "b",
+  },
+];
+let index = 0;
+let total = questions.length;
+let correct = 0;
+let right = 0;
+let wrong = 0;
+const quebox = document.getElementById("quebox");
+const optioninput = document.querySelectorAll(".options");
 
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
-
-// used for sessions
-const session = require("express-session");
-const passport = require("passport");
-const passportLocal = require("./config/passport");
-
-const MongoStore = require("connect-mongo");
-
-app.use(cookieParser());
-
-// set up view engine
-app.set("view engine", "ejs");
-app.set("views", "./views");
-
-// mongo-store is used to store session cookies in database
-app.use(
-  session({
-    name: "placement-cell",
-    secret: "asewe",
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      maxAge: 1000 * 60 * 100,
-    },
-    store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://nandanith7563:jfz40OLtDX3XhDF6@cluster0.kx8uhq4.mongodb.net/?retryWrites=true&w=majority",
-      autoRemove: "disabled",
-    }),
-    function(err) {
-      console.log(err || "connect-mongodb setup ok");
-    },
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-// sets the authenticated user in the response
-app.use(passport.setAuthenticatedUser);
-
-// using express routers
-app.use(require("./routes"));
-
-// using bodyParser
-app.use(bodyParser.json());
-
-// listening to the port 8000;
-app.listen(port, (err) => {
-  if (err) {
-    console.log("error in starting the server", err);
-    return;
+const loadquestion = () => {
+    if(index==total){
+        return endquiz();
+    }
+    reset();
+  const data = questions[index];
+  quebox.innerHTML = `${index + 1})${data.question}`;
+  optioninput[0].nextElementSibling.innerHTML = data.a;
+  optioninput[1].nextElementSibling.innerHTML = data.b;
+  optioninput[2].nextElementSibling.innerHTML = data.c;
+  optioninput[3].nextElementSibling.innerHTML = data.d;
+  
+};
+const submitquiz = () => {
+  const data = questions[index];
+  const ans = getanswer();
+  if (ans === data.correct) {
+    right++;
+  } else {
+    wrong++;
   }
-  console.log("server is succesfully running on port 8000");
-});
+  index++;
+  loadquestion();
+  return;
+};
+const getanswer = () => {
+    let answer;
+  optioninput.forEach((input) => {
+    if (input.checked) {
+        console.log(input);
+      answer= input.value;
+    }
+  })
+  return answer;
+}
+const reset=()=>{
+    optioninput.forEach((input) => {
+    
+        input.checked=false;
+        
+      })
+}
+const endquiz=()=>{
+    document.getElementById("box").innerHTML = `<h3>Thank you for playing quiz</h3> <h2>${right}/${total} are correct</h2> <button onclick="location.reload()">Play again</button>`;
+
+
+ 
+}
+loadquestion();
